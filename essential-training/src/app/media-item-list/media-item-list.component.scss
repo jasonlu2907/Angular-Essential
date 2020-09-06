@@ -4,15 +4,18 @@
     flex-direction: column;
     padding: 10px;
 }
+
 section {
   flex: 1;
   display: flex;
   flex-flow: row wrap;
   align-content: flex-start;
+
   app-media-item {
     margin: 10px;
   }
 }
+
 footer {
   text-align: right;
   .icon {

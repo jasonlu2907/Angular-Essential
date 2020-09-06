@@ -1,3 +1,6 @@
+<header>
+    <div>{{ mediaItems | categoryList}}</div>
+</header>
 <section>
     <app-media-item *ngFor="let item of mediaItems"
         [mediaItem]="item"
