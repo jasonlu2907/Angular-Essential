@@ -1,6 +1,9 @@
 <header>
   <h2>Add Media to Watch</h2>
 </header>
+
+<!-- Dung [formGroup] <=> model-driven form
+    Dung #dattenchocaiform="ngForm" <=> template-driven form-->
 <form [formGroup]="form"
     (ngSubmit)="onSubmit(form.value)">
   <ul>
@@ -31,5 +34,5 @@
       <input type="text" name="year" id="year" maxlength="4" formControlName="year"/>
     </li>
   </ul>
-  <button type="submit">Save</button>
+  <button [disabled]="!form.valid" type="submit">Save</button>
 </form>
