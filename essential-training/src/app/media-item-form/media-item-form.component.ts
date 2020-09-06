@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-media-item-form',
@@ -6,8 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./media-item-form.component.scss']
 })
 export class MediaItemFormComponent implements OnInit {
+  form: FormGroup;
 
-  constructor() { }
+  constructor() {
+    this.form = new FormGroup({
+      medium: new FormControl('Movies'),
+      name: new FormControl(''),
+      category: new FormControl(''),
+      year: new FormControl('')
+    });
+  }
 
   ngOnInit(): void {
   }
