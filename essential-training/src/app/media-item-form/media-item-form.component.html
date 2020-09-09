@@ -10,8 +10,8 @@
     <li>
       <label for="medium">Medium</label>
       <select name="medium" id="medium" formControlName="medium">
-        <option value="Movies">Movies</option>
-        <option value="Series">Series</option>
+        <!-- Ung dung cua Inject -->
+        <option *ngFor="let medium of lookupLists.mediums" value="{{medium}}">{{medium}}</option>
       </select>
     </li>
     <li>
@@ -35,9 +35,9 @@
     <li>
       <label for="year">Year</label>
       <input type="text" name="year" id="year" maxlength="4" formControlName="year"/>
-      
+
       <!-- <div *ngIf="form.get('year').hasError('year')" class="error"> -->
-      <div *ngIf="form.get('year').errors as yearErrors">
+      <div *ngIf="form.get('year').errors as yearErrors" class="error">
         Year is out limit, must between {{yearErrors.year.min}} and {{yearErrors.year.max}}
       </div>
     </li>

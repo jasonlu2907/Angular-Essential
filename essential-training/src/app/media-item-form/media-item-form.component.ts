@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
+import { MediaItemService } from '../services/media-item.service';
+
 @Component({
   selector: 'app-media-item-form',
   templateUrl: './media-item-form.component.html',
@@ -8,19 +11,22 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class MediaItemFormComponent implements OnInit {
   form: FormGroup;
 
-  constructor() {
+  // Inject
+  constructor(private fb: FormBuilder,
+              private mediaItemService: MediaItemService,
+              @Inject('lookupListToken') public lookupLists) {
   }
 
   ngOnInit() {
-    this.form = new FormGroup({
-      medium: new FormControl('Movies'),
+    this.form = this.fb.group({
+      medium: this.fb.control('Movies'),
       // Built-on Validator
-      name: new FormControl('', Validators.compose([
+      name: this.fb.control('', Validators.compose([
         Validators.required,
         Validators.pattern('[\\w\\-\\s\\/]+')
       ])),
-      category: new FormControl(''),
-      year: new FormControl('', this.yearValidator)
+      category: this.fb.control(''),
+      year: this.fb.control('', this.yearValidator)
     });
   }
 
@@ -45,6 +51,7 @@ export class MediaItemFormComponent implements OnInit {
 
   onSubmit(mediaItem: any) {
     console.log(mediaItem);
+    this.mediaItemService.add(mediaItem);
   }
 
 }
