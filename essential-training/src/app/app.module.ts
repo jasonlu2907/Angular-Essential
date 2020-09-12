@@ -18,6 +18,9 @@ import { MediaItemService } from './services/media-item.service';
 
 import { lookupListToken, lookupLists } from './share/providers';
 import { MockXHRBackend } from './mock-xhr-backend';
+
+// ROUTING
+import { routing } from './app.routing';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,8 @@ import { MockXHRBackend } from './mock-xhr-backend';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    routing
   ],
   providers: [ MediaItemService,
     { provide: lookupListToken, useValue: lookupLists },
