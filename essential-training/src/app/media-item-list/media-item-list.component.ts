@@ -23,13 +23,16 @@ export class MediaItemListComponent implements OnInit {
   getMediaItems(medium: string) {
     this.medium = medium;
     this.mediaItemService.get(medium)
-      //pipe() sẽ ko execute cho tới khi component dùng subscribe
+      //Observable sẽ ko execute cho tới khi component dùng subscribe
       .subscribe((mediaItems) => {
         this.mediaItems = mediaItems;
       });
   }
 
   onMediaItemDelete(mediaItem) {
-    this.mediaItemService.delete(mediaItem);
+    this.mediaItemService.delete(mediaItem)
+      .subscribe(() => {
+        this.getMediaItems(this.medium);
+      });
   }
 }

@@ -69,14 +69,18 @@ export class MediaItemService {
   }
 
   add(mediaItem) {
-    this.mediaItems.push(mediaItem);
+    // this.mediaItems.push(mediaItem);
+    /**Tham số 1: url string(cái này nằm trong mockbackend), tham số 2: body */
+    return this.http.post('mediaitems', mediaItem);
   }
 
   delete(mediaItem) {
-    const index = this.mediaItems.indexOf(mediaItem);
-    if(index >= 0) {
-      this.mediaItems.splice(index, 1);
-    }
+    // const index = this.mediaItems.indexOf(mediaItem);
+    // if(index >= 0) {
+    //   this.mediaItems.splice(index, 1);
+    // }
+
+    return this.http.delete(`mediaitems/${mediaItem.id}`);
   }
 }
 
