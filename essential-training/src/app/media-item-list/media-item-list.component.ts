@@ -8,20 +8,16 @@ import { MediaItemService } from '../services/media-item.service';
   styleUrls: ['./media-item-list.component.scss'],
 })
 export class MediaItemListComponent implements OnInit {
-  mediaItems: {
-    id: number;
-    name: string;
-    medium: string;
-    category: string;
-    year: number;
-    watchedOn: number;
-    isFavorite: boolean;
-  }[];
+  mediaItems;
 
   constructor(private mediaItemService: MediaItemService) {}
 
   ngOnInit(): void {
-    this.mediaItems = this.mediaItemService.get();
+    // Su dung Observable roi la ko can dung dong nay nua
+    // this.mediaItems = this.mediaItemService.get();
+
+    this.mediaItemService.get()
+      .subscribe(mediaItems => this.mediaItems = mediaItems);
   }
 
   onMediaItemDelete(mediaItem) {
