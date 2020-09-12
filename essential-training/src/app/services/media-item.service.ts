@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -65,13 +66,15 @@ export class MediaItemService {
      * tham so response co dang MediaItemResponse
     */
     return this.http.get<MediaItemResponse>('mediaitems', getOptions)
-      .pipe(map(response => response.mediaItems));
+      .pipe(map(response => response.mediaItems),
+            catchError(this.handleError));
   }
 
   add(mediaItem) {
     // this.mediaItems.push(mediaItem);
     /**Tham số 1: url string(cái này nằm trong mockbackend), tham số 2: body */
-    return this.http.post('mediaitems', mediaItem);
+    return this.http.post('mediaitems', mediaItem)
+      .pipe(catchError(this.handleError));
   }
 
   delete(mediaItem) {
@@ -79,8 +82,13 @@ export class MediaItemService {
     // if(index >= 0) {
     //   this.mediaItems.splice(index, 1);
     // }
+    return this.http.delete(`mediaitems/${mediaItem.id}`)
+      .pipe(catchError(this.handleError));
+  }
 
-    return this.http.delete(`mediaitems/${mediaItem.id}`);
+  private handleError (error: HttpErrorResponse) {
+    console.log(error.message);
+    return throwError('Error occurs, please try again.');
   }
 }
 
