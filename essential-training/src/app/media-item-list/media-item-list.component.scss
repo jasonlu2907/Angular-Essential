@@ -23,3 +23,23 @@ footer {
     height: 64px;
   }
 }
+
+nav a {
+  cursor: pointer;
+}
+
+header {
+  color: #c6c5c3;
+}
+header.medium-movies {
+  color: #53ace4;
+}
+header.medium-series {
+  color: #45bf94;
+}
+header > h2 {
+  font-size: 1.4em;
+}
+header > h2.error {
+  color: #d93a3e;
+}

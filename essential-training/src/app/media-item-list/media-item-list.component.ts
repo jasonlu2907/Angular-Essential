@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MediaItemService } from '../services/media-item.service';
+import { MediaItemService, MediaItem } from '../services/media-item.service';
 
 @Component({
   selector: 'app-media-item-list',
@@ -8,7 +8,8 @@ import { MediaItemService } from '../services/media-item.service';
   styleUrls: ['./media-item-list.component.scss'],
 })
 export class MediaItemListComponent implements OnInit {
-  mediaItems;
+  medium = '';
+  mediaItems: MediaItem[];
 
   constructor(private mediaItemService: MediaItemService) {}
 
@@ -16,8 +17,15 @@ export class MediaItemListComponent implements OnInit {
     // Su dung Observable roi la ko can dung dong nay nua
     // this.mediaItems = this.mediaItemService.get();
 
-    this.mediaItemService.get()
-      .subscribe(mediaItems => this.mediaItems = mediaItems);
+    this.getMediaItems(this.medium);
+  }
+
+  getMediaItems(medium: string) {
+    this.medium = medium;
+    this.mediaItemService.get(medium)
+      .subscribe((mediaItems) => {
+        this.mediaItems = mediaItems;
+      });
   }
 
   onMediaItemDelete(mediaItem) {

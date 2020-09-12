@@ -1,12 +1,26 @@
-<header>
-    <div>{{ mediaItems | categoryList}}</div>
+<nav>
+    <a (click)="getMediaItems('')">
+      <img src="/essential-training/src/assets/04.png" class="icon" />
+    </a>
+    <a (click)="getMediaItems('Movies')">
+      <img src="/essential-training/src/assets/03.png" class="icon" />
+    </a>
+    <a (click)="getMediaItems('Series')">
+      <img src="/essential-training/src/assets/02.png" class="icon" />
+    </a>
+</nav>
+
+<header 
+		[ngClass]="{'medium-movies':medium === 'Movies', 'medium-series':medium === 'Series'}">
+		<h2>{{medium}}</h2>
+		<div *ngIf="mediaItems">{{ mediaItems | categoryList }}</div>
 </header>
+
 <section>
     <app-media-item *ngFor="let item of mediaItems"
         [mediaItem]="item"
         (delete)="onMediaItemDelete($event)"
         [ngClass]="{ 'medium-movies': item.medium === 'Movies', 
                 'medium-series': item.medium === 'Series' }">
-
     </app-media-item>
 </section>
