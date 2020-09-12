@@ -14,7 +14,7 @@ export class MediaItemListComponent implements OnInit {
   constructor(private mediaItemService: MediaItemService) {}
 
   ngOnInit(): void {
-    // Su dung Observable roi la ko can dung dong nay nua
+    // Su dung Observable roi la ko can dung dòng nay nua
     // this.mediaItems = this.mediaItemService.get();
 
     this.getMediaItems(this.medium);
@@ -23,6 +23,7 @@ export class MediaItemListComponent implements OnInit {
   getMediaItems(medium: string) {
     this.medium = medium;
     this.mediaItemService.get(medium)
+      //pipe() sẽ ko execute cho tới khi component dùng subscribe
       .subscribe((mediaItems) => {
         this.mediaItems = mediaItems;
       });
